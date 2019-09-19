@@ -42,7 +42,7 @@ public class Main {
             ps.setString(2, 19 / 09 / 2019);
             ps.setString(3, 12.99);
             //continue phase 1, lesson 7
-            ps.executeUpdate();
+            ps.executeUpdate();//test
         }catch (Exception exception){
             System.out.println("Database error: "exception.getMessage());
 
