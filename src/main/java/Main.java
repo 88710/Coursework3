@@ -33,7 +33,7 @@ public class Main {
     public static void main(String[] args) {
         openDatabase("Test.db");
         insertOrder("12/9/2019", "12/9/2019", 12.99,true,"cash", "collection", "John");
-        insertOrder("12/9/2019", 15.99, true,"card","collection", "Claire");//hhhhh
+        insertOrder("12/9/2019", 15.99, true,"card","collection", "Claire");
         insertOrder("13/9/2019", 20.00, true,"cash","delivery", "Ben");
         listOrder();
         closeDatabase();
@@ -59,9 +59,9 @@ public class Main {
 
     }
 
-    public static void listOrder(int RefNo){//hhhh
+    public static void listOrder(int RefNo){
         try {
-            PreparedStatement ps = db.prepareStatement("SELECT DateOrder, OrderPrice, CustomerName FROM orders WHERE ReferenceNO = RefNo ");
+            PreparedStatement ps = db.prepareStatement("SELECT ReferenceNo, DateOrder, OrderPrice, CustomerName FROM orders WHERE ReferenceNO = RefNo ");
             ResultSet results = ps.executeQuery();
             while(results.next()){
                 String ReferenceNo = results.getString(1);
