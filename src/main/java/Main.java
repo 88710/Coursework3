@@ -32,17 +32,17 @@ public class Main {
 
     public static void main(String[] args) {
         openDatabase("Test.db");
-        insertOrder("12/9/2019", "12/9/2019", 12.99,true,"cash", "collection", "John");
-        insertOrder("12/9/2019", 15.99, true,"card","collection", "Claire");
-        insertOrder("13/9/2019", 20.00, true,"cash","delivery", "Ben");
+        insertOrder(000001, "12/9/2019", 12.99,true,"cash", "collection", "John");
+        insertOrder(000002, "12/9/2019", 15.99,true,"card", "collection","Claire");
+        insertOrder(000003, "13/9/2019", 20.00,true,"cash", "delivery","Ben");
         listOrder();
         closeDatabase();
 
     }
 
-    public static void insertOrder(Int ReferenceNo, String DateOrder, Double OrderPrice, Boolean PaymentSuccessful, String PaymentType, String DeliveryOrCollection, String CustomerName) {
+    public static void insertOrder(int ReferenceNo, String DateOrder, double OrderPrice, boolean PaymentSuccessful, String PaymentType, String DeliveryOrCollection, String CustomerName) {
         try {
-            PreparedStatement ps = db.prepareStatement("INSERT INTO orders(ReferenceNO, DateOrder, OrderPrice, PaymentSuccessful, PaymentType, DeliveryOrCollection, CustomerName) Values (?,?,?,?,?,?)");
+            PreparedStatement ps = db.prepareStatement("INSERT INTO Orders(ReferenceNO, DateOrder, OrderPrice, PaymentSuccessful, PaymentType, DeliveryOrCollection, CustomerName) Values (?,?,?,?,?,?)");
             ps.setInt(1, ReferenceNo);
             ps.setString(2, DateOrder);
             ps.setDouble(3, OrderPrice );
@@ -61,7 +61,7 @@ public class Main {
 
     public static void listOrder(int RefNo){
         try {
-            PreparedStatement ps = db.prepareStatement("SELECT ReferenceNo, DateOrder, OrderPrice, CustomerName FROM orders WHERE ReferenceNO = RefNo ");
+            PreparedStatement ps = db.prepareStatement("SELECT ReferenceNo, DateOrder, OrderPrice, PaymentSuccessful, PaymentType, DeliveryOrCollection, CustomerName FROM Orders WHERE ReferenceNO = RefNo ");
             ResultSet results = ps.executeQuery();
             while(results.next()){
                 String ReferenceNo = results.getString(1);
@@ -85,4 +85,3 @@ public class Main {
         }
     }
 }
-//put in refefernce NO and get REFNo to equal Reference No
