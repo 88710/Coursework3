@@ -32,10 +32,16 @@ public class Main {
 
     public static void main(String[] args) {
         openDatabase("CourseworkDatabase.db");
-        OrderController.insertOrder(000001, "12/9/2019", 12.99,true,"cash", "collection", "John");
+        OrderController.insertOrder(000001, "12/9/2019", 12.99,true,"cash", "Delivery", "John");
         OrderController.insertOrder(000002, "12/9/2019", 15.99,true,"card", "collection","Claire");
-        OrderController.insertOrder(000003, "13/9/2019", 20.00,true,"cash", "delivery","Ben");
+        PizzaController.insertPizza("Hawaiin", false, false,true);
+        PizzaController.insertPizza("VeggieDeluxe", true, true,false);
+        PizzaController.insertPizza("NewYorker", false, false,false);
         OrderController.listOrder(000002);
+        PizzaController.listPizzas("NewYorker");
+        DeliveryController.insertDelivery(000001, 14, "New Bourne","Farnborough","GU14 5YT");
+        DeliveryController.listDelivery(000001);
+
         closeDatabase();
 
     }

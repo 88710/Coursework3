@@ -18,7 +18,7 @@ import java.sql.ResultSet;
 
         }
 
-        public static void listPizzas(int RefNo) {
+        public static void listPizzas(String PizzaQuery) {
             try {
                 PreparedStatement ps = Main.db.prepareStatement("SELECT PizzaName,Vegetarian,Vegan,GlutenFree FROM Pizzas WHERE PizzaName = PizzaQuery ");
                 ResultSet results = ps.executeQuery();
@@ -51,7 +51,7 @@ import java.sql.ResultSet;
             } catch (Exception exception) {
                 System.out.println("Database error: " + exception.getMessage());
             }
-            public static void PizzasDelete(String PizzaName){
+            public static void PizzaDelete(String PizzaName){
                 try {
                     PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Pizzas WHERE PizzaName = ?");
                     ps.setString(1, PizzaName);
