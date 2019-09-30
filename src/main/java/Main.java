@@ -20,7 +20,7 @@ public class Main {
 
         }
     }
-
+//test
     private static void closeDatabase() {
         try {
             db.close();
