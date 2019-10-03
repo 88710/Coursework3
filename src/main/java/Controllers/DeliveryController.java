@@ -1,3 +1,13 @@
+package Controllers;
+
+import Server.Main;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -19,28 +29,28 @@ public class DeliveryController {
         }
 
     }
-
-    public static void listDelivery(int RefNo) {
+    @GET
+    @Path("list")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String listDelivery(int RefNo) {
+        System.out.println("Delivery/list");
+        JSONArray list = new JSONArray();
         try {
             PreparedStatement ps = Main.db.prepareStatement("SELECT ReferenceNo, HouseNumber, StreetName, Town, Postcode, FROM Delivery WHERE ReferenceNO = RefNo ");
             ResultSet results = ps.executeQuery();
             while (results.next()) {
-                int ReferenceNo = results.getInt(1);
-                int HouseNumber = results.getInt(2);
-                String StreetName = results.getString(3);
-                String Town = results.getString(4);
-                String Postcode = results.getString(5);
-                System.out.println("ReferenceNo: " + ReferenceNo + ",  ");
-                System.out.println("HouseNumber: " + HouseNumber + ",  ");
-                System.out.println("StreetName: " + StreetName + ",  ");
-                System.out.println("Town: " + Town + ",  ");
-                System.out.println("Postcode: " + Postcode + ",  ");
-
-
-
+                JSONObject item = new JSONObject();
+                item.put("ReferenceNo",results.getInt(1));
+                item.put("HouseNumber",results.getInt(2));
+                item.put("StreetName",results.getString(3));
+                item.put("Town",results.getString(4));
+                item.put("Postcode",results.getString(5));
+                list.add(item);
             }
+            return list.toString();
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
         }
     }
 
@@ -58,7 +68,7 @@ public class DeliveryController {
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
         }
-        public static void DeliveryDelete(int RefNo){
+        /*public static void DeliveryDelete(int RefNo){
             try {
                 PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Delivery WHERE ReferenceNo = ?");
                 ps.setInt(1, RefNo);
@@ -67,7 +77,7 @@ public class DeliveryController {
             } catch (Exception exception) {
                 System.out.println("Database error: " + exception.getMessage());
             }
-        }
+        }*/
     }
 }
 
