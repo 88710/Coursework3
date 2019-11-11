@@ -38,15 +38,8 @@ public class Main {
 
     public static void main(String[] args) {
         openDatabase("CourseworkDatabase.db");
-        Controllers.OrderController.insertOrder(000001, "12/9/2019", 12.99,true,"cash", "Delivery", "John");
-        Controllers.OrderController.insertOrder(000002, "12/9/2019", 15.99,true,"card", "collection","Claire");
-        Controllers.PizzaController.insertPizza("Hawaiin", false, false,true);
-        Controllers.PizzaController.insertPizza("VeggieDeluxe", true, true,false);
-        Controllers.PizzaController.insertPizza("NewYorker", false, false,false);
-        //Controllers.OrderController.listOrder(000002);
-        //Controllers.PizzaController.listPizzas("NewYorker");
-        Controllers.DeliveryController.insertDelivery(000001, 14, "New Bourne","Farnborough","GU14 5YT");
-        //Controllers.DeliveryController.listDelivery(000001);
+
+        //Methods go Here!!
 
         closeDatabase();
         openDatabase("CourseworkDatabase.db");
