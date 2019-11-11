@@ -90,7 +90,6 @@ public class DeliveryController {
             return "{\"error\": \"Unable to update item, please see server console for more info.\"}";
         }
     }
-
     @POST
     @Path("delete")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
