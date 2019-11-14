@@ -39,7 +39,57 @@ public class Main {
     public static void main(String[] args) {
         openDatabase("CourseworkDatabase.db");
 
-        //Methods go Here!!
+        try {
+   Controllers.PizzaController.insertPizza("Tropical",false, true, false);
+} catch(Exception exception) {
+   System.out.println("Database insert error: " + exception.getMessage());
+}
+System.out.println("Insertion successful" + Controllers.PizzaController.listPizza("Tropical"));
+
+/*try {
+   Controllers.OrderController.insertOrder(000001,"23/10/2019", 12.99, true, "cash","Collection", "John");
+} catch(Exception exception) {
+   System.out.println("Database insert error: " + exception.getMessage());
+}
+System.out.println("Insertion successful" + Controllers.OrderController.listOrder(000001));*/
+
+/*try {
+   Controllers.OrderController.insertOrder(000002,"13/09/2019", 15.99, true, "cash","Collection", "Steve");
+} catch(Exception exception) {
+   System.out.println("Database insert error: " + exception.getMessage());
+}
+System.out.println("Insertion successful" + Controllers.OrderController.listOrder(000002));*/
+
+/*try {
+   Controllers.PizzaController.listPizza("Tropical");
+} catch(Exception exception) {
+   System.out.println("Database list error: " + exception.getMessage());
+}
+System.out.println("Insertion successful" + Controllers.PizzaController.listPizza("Tropical"));
+
+closeDatabase();
+openDatabase("CourseworkDatabase.db");*/
+
+/*try {
+   Controllers.PizzaController.listPizza("Tropical");
+} catch(Exception exception) {
+   System.out.println("Database list error: " + exception.getMessage());
+}
+System.out.println("Insertion successful" + Controllers.PizzaController.listPizza("Tropical"));*/
+
+/*try {
+   Controllers.OrderController.updateOrder(000001, "12/09/2019", 12.50, true, "Delivery", "cash", "Sarah");
+} catch(Exception exception) {
+   System.out.println("Database list error: " + exception.getMessage());
+}
+System.out.println("Insertion successful" + Controllers.OrderController.listOrder(000001));*/
+
+/*try {
+   Controllers.PizzaController.deletePizza("Tropical");
+} catch(Exception exception) {
+   System.out.println("Database list error: " + exception.getMessage());
+}
+*/
 
         closeDatabase();
         openDatabase("CourseworkDatabase.db");

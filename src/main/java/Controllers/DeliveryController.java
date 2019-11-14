@@ -20,7 +20,7 @@ public class DeliveryController {
     @Path("new")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String insertDelivery(@FormDataParam("ReferenceNo") Integer ReferenceNo, @FormDataParam("HouseNumber") Integer HouseNumber, @FormDataParam("StreetName") String StreetName, @FormDataParam("Town") String Town, @FormDataParam("Postcode") String Postcode) {
+    public static String insertDelivery(@FormDataParam("ReferenceNo") Integer ReferenceNo, @FormDataParam("HouseNumber") Integer HouseNumber, @FormDataParam("StreetName") String StreetName, @FormDataParam("Town") String Town, @FormDataParam("Postcode") String Postcode) {
         try {
             if (ReferenceNo == null || HouseNumber == null || StreetName == null || Town == null || Postcode == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
@@ -44,7 +44,7 @@ public class DeliveryController {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listDelivery(int RefNo) {
+    public static String listDelivery(int RefNo) {
         System.out.println("Delivery/list");
         JSONArray list = new JSONArray();
         try {
@@ -69,7 +69,7 @@ public class DeliveryController {
     @Path("update")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String updateDelivery(@FormDataParam("ReferenceNo") Integer ReferenceNo, @FormDataParam("HouseNumber") Integer HouseNumber, @FormDataParam("StreetName") String StreetName, @FormDataParam("Town") String Town, @FormDataParam("Postcode") String Postcode) {
+    public static String updateDelivery(@FormDataParam("ReferenceNo") Integer ReferenceNo, @FormDataParam("HouseNumber") Integer HouseNumber, @FormDataParam("StreetName") String StreetName, @FormDataParam("Town") String Town, @FormDataParam("Postcode") String Postcode) {
         try {
             if (ReferenceNo == null || HouseNumber == null || StreetName == null || Town == null || Postcode == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
@@ -94,7 +94,7 @@ public class DeliveryController {
     @Path("delete")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String deleteDelivery(@FormDataParam("ReferenceNo") Integer ReferenceNo) {
+    public static String deleteDelivery(@FormDataParam("ReferenceNo") Integer ReferenceNo) {
 
         try {
             if (ReferenceNo == null) {

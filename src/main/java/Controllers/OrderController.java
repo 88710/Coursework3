@@ -19,7 +19,7 @@ public class OrderController {
     @Path("new")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String insertOrder(@FormDataParam("ReferenceNo") Integer ReferenceNo, @FormDataParam("DateOrder") String DateOrder, @FormDataParam("OrderPrice") double OrderPrice, @FormDataParam("PaymentSuccessful") boolean PaymentSuccessful, @FormDataParam("PaymentType") String PaymentType, @FormDataParam("DeliveryOrCollection") String DeliveryOrCollection, @FormDataParam("CustomerName") String CustomerName) {
+    public static String insertOrder(@FormDataParam("ReferenceNo") Integer ReferenceNo, @FormDataParam("DateOrder") String DateOrder, @FormDataParam("OrderPrice") double OrderPrice, @FormDataParam("PaymentSuccessful") boolean PaymentSuccessful, @FormDataParam("PaymentType") String PaymentType, @FormDataParam("DeliveryOrCollection") String DeliveryOrCollection, @FormDataParam("CustomerName") String CustomerName) {
         try {
             if (ReferenceNo == null || DateOrder == null || PaymentType == null || DeliveryOrCollection == null || CustomerName == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
@@ -47,7 +47,7 @@ public class OrderController {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public String listOrder(int RefNo) {
+    public static String listOrder(int RefNo) {
         System.out.println("Orders/list");
         JSONArray list = new JSONArray();
         try {
@@ -75,7 +75,7 @@ public class OrderController {
     @Path("update")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String updateThing(
+    public static String updateOrder(
             @FormDataParam("ReferenceNo") Integer ReferenceNo, @FormDataParam("DateOrder") String DateOrder, @FormDataParam("OrderPrice") Double OrderPrice, @FormDataParam("PaymentSuccessful") Boolean PaymentSuccessful, @FormDataParam("DeliveryOrCollection") String DeliveryOrCollection, @FormDataParam("PaymentType") String PaymentType, @FormDataParam("CustomerName") String CustomerName) {
         try {
             if (ReferenceNo == null || DateOrder == null || PaymentType == null || DeliveryOrCollection == null || CustomerName == null) {
@@ -102,7 +102,7 @@ public class OrderController {
     @Path("delete")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String deleteOrder(@FormDataParam("ReferenceNo") Integer ReferenceNo) {
+    public static String deleteOrder(@FormDataParam("ReferenceNo") Integer ReferenceNo) {
 
         try {
             if (ReferenceNo == null) {
