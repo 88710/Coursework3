@@ -15,10 +15,10 @@ public class Main {
 
     private static void openDatabase(String dbFile) {
         try {
-            Class.forName("ord.sqlite.JDBC");
+            Class.forName("org.sqlite.JDBC");
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
-            db = DriverManager.getConnection("jdbc:sqlite:recources/" + dbFile, config.toProperties());
+            db = DriverManager.getConnection("jdbc:sqlite:resources/" + dbFile, config.toProperties());
             System.out.println("Database connection successfully established.");
 
         } catch (Exception exception) {
@@ -40,11 +40,11 @@ public class Main {
         openDatabase("CourseworkDatabase.db");
 
         try {
-   Controllers.PizzaController.insertPizza("Tropical",false, true, false);
+   Controllers.PizzaController.insertPizza(3,"Plain", true, false, false);
 } catch(Exception exception) {
    System.out.println("Database insert error: " + exception.getMessage());
 }
-System.out.println("Insertion successful" + Controllers.PizzaController.listPizza("Tropical"));
+System.out.println("Insertion successful" + Controllers.PizzaController.listPizza(3));
 
 /*try {
    Controllers.OrderController.insertOrder(000001,"23/10/2019", 12.99, true, "cash","Collection", "John");
@@ -94,7 +94,7 @@ System.out.println("Insertion successful" + Controllers.OrderController.listOrde
         closeDatabase();
         openDatabase("CourseworkDatabase.db");
 
-        ResourceConfig config = new ResourceConfig();
+       /* ResourceConfig config = new ResourceConfig();
         config.packages("Controllers");
         config.register(MultiPartFeature.class);
         ServletHolder servlet = new ServletHolder(new ServletContainer(config));
@@ -109,7 +109,7 @@ System.out.println("Insertion successful" + Controllers.OrderController.listOrde
             server.join();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
 
     }

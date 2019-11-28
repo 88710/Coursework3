@@ -19,17 +19,18 @@ import java.sql.ResultSet;
         @Path("new")
         @Consumes(MediaType.MULTIPART_FORM_DATA)
         @Produces(MediaType.APPLICATION_JSON)
-        public static String insertPizza(@FormDataParam("PizzaName") String PizzaName, @FormDataParam("Vegetarian") Boolean Vegetarian, @FormDataParam("Vegan") Boolean Vegan, @FormDataParam("GlutenFree") Boolean GlutenFree) {
+        public static String insertPizza(@FormDataParam("PizzaId") Integer PizzaId, @FormDataParam("PizzaName") String PizzaName, @FormDataParam("Vegetarian") Boolean Vegetarian, @FormDataParam("Vegan") Boolean Vegan, @FormDataParam("GlutenFree") Boolean GlutenFree) {
             try {
-                if (PizzaName == null || Vegetarian == null || Vegan == null || GlutenFree == null) {
+                if (PizzaId == null || PizzaName == null || Vegetarian == null || Vegan == null || GlutenFree == null) {
                     throw new Exception("One or more form data parameters are missing in the HTTP request.");
                 }
-                System.out.println("thing/new PizzaName=" + PizzaName);
-                PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Pizzas(PizzaName, Vegetarian, Vegan, GlutenFree) Values (?,?,?,?)");
-                ps.setString(1, PizzaName);
+                System.out.println("thing/new PizzaId=" + PizzaId);
+                PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Pizzas(PizzaId, PizzaName, Vegetarian, Vegan, GlutenFree) Values (?,?,?,?,?)");
+                ps.setInt(1, PizzaId);
                 ps.setBoolean(2, Vegetarian);
                 ps.setBoolean(3, Vegan);
                 ps.setBoolean(4, GlutenFree);
+                ps.setString(5, PizzaName);
                 ps.executeUpdate();//test
                 return "{\"status\": \"OK\"}";
 
@@ -43,18 +44,20 @@ import java.sql.ResultSet;
         @GET
         @Path("list")
         @Produces(MediaType.APPLICATION_JSON)
-        public static String listPizza(String PizzaNameX) {
+        public static String listPizza(Integer PizzaId) {
             System.out.println("Pizzas/list");
             JSONArray list = new JSONArray();
             try {
-                PreparedStatement ps = Main.db.prepareStatement("SELECT PizzaName, Vegetarian, Vegan, GlutenFree, FROM Pizzas WHERE PizzaName = PizzaNameX ");
+                PreparedStatement ps = Main.db.prepareStatement("SELECT PizzaId, PizzaName, Vegetarian, Vegan, GlutenFree FROM Pizzas WHERE PizzaId = ? ");
+                ps.setInt(1,PizzaId);
                 ResultSet results = ps.executeQuery();
                 while (results.next()) {
                     JSONObject item = new JSONObject();
-                    item.put("PizzaName",results.getString(1));
+                    item.put("PizzaId",results.getInt(1));
                     item.put("Vegetarian",results.getBoolean(2));
                     item.put("Vegan",results.getBoolean(3));
                     item.put("GlutenFree",results.getBoolean(4));
+                    item.put("PizzaName",results.getString(5));
                     list.add(item);
                 }
                 return list.toString();
@@ -68,14 +71,15 @@ import java.sql.ResultSet;
         @Path("update")
         @Consumes(MediaType.MULTIPART_FORM_DATA)
         @Produces(MediaType.APPLICATION_JSON)
-        public static String updatePizza(@FormDataParam("PizzaName") String PizzaName, @FormDataParam("Vegetarian") Boolean Vegetarian, @FormDataParam("Vegan") Boolean Vegan, @FormDataParam("GlutenFree") Boolean GlutenFree) {
+        public static String updatePizza(@FormDataParam("PizzaId") Integer PizzaId, @FormDataParam("PizzaName") String PizzaName, @FormDataParam("Vegetarian") Boolean Vegetarian, @FormDataParam("Vegan") Boolean Vegan, @FormDataParam("GlutenFree") Boolean GlutenFree) {
             try {
-                if (PizzaName == null || Vegetarian == null || Vegan == null || GlutenFree == null ) {
+                if (PizzaId == null || PizzaName == null || Vegetarian == null || Vegan == null || GlutenFree == null ) {
                     throw new Exception("One or more form data parameters are missing in the HTTP request.");
                 }
-                System.out.println("thing/update id=" + PizzaName);
+                System.out.println("thing/update id=" + PizzaId);
 
-                PreparedStatement ps = Main.db.prepareStatement("UPDATE Pizzas SET  Vegetarian= ?, Vegan = ?, GlutenFree = ? WHERE PizzaName = ?");
+                PreparedStatement ps = Main.db.prepareStatement("UPDATE Pizzas SET  Vegetarian= ?, Vegan = ?, GlutenFree = ? WHERE PizzaId = ?");
+                ps.setInt(1, PizzaId);
                 ps.setString(1, PizzaName);
                 ps.setBoolean(2, Vegetarian);
                 ps.setBoolean(3, Vegan);
@@ -92,17 +96,17 @@ import java.sql.ResultSet;
         @Path("delete")
         @Consumes(MediaType.MULTIPART_FORM_DATA)
         @Produces(MediaType.APPLICATION_JSON)
-        public static String deletePizza(@FormDataParam("PizzaName") String PizzaName) {
+        public static String deletePizza(@FormDataParam("PizzaId") String PizzaId) {
 
             try {
-                if (PizzaName == null) {
+                if (PizzaId == null) {
                     throw new Exception("One or more form data parameters are missing in the HTTP request.");
                 }
-                System.out.println("thing/delete id=" + PizzaName);
+                System.out.println("thing/delete id=" + PizzaId);
 
-                PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Pizzas WHERE PizzaName = ?");
+                PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Pizzas WHERE PizzaId = ?");
 
-                ps.setString(1, PizzaName);
+                ps.setString(1, PizzaId);
 
                 ps.execute();
 
