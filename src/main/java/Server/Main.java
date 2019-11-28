@@ -35,7 +35,7 @@ public class Main {
             System.out.println("Database disconnection error: " + exception.getMessage());
         }
     }
-
+//test
     public static void main(String[] args) {
         openDatabase("CourseworkDatabase.db");
 
