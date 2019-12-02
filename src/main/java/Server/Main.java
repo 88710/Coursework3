@@ -84,11 +84,11 @@ try {
 }
 System.out.println("Insertion successful" + Controllers.PizzaController.listPizza(1));
 */
-try {
+/*try {
    Controllers.OrderController.deleteOrder(2);
 } catch(Exception exception) {
    System.out.println("Database list error: " + exception.getMessage());
-}
+}*/
 
 
         closeDatabase();
