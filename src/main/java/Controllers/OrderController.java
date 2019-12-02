@@ -47,11 +47,12 @@ public class OrderController {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public static String listOrder(int RefNo) {
+    public static String listOrder(int ReferenceNo) {
         System.out.println("Orders/list");
         JSONArray list = new JSONArray();
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT ReferenceNo, Dateorder, OrderPrice, PaymentSuccessful, PaymentType, DeliveryOrCollection,CustomerName,  FROM Orders WHERE ReferenceNO = RefNo ");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT ReferenceNo, Dateorder, OrderPrice, PaymentSuccessful, PaymentType, DeliveryOrCollection,CustomerName  FROM Orders WHERE ReferenceNo = ? ");
+            ps.setInt(1,ReferenceNo);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
                 JSONObject item = new JSONObject();
@@ -81,7 +82,7 @@ public class OrderController {
             if (ReferenceNo == null || DateOrder == null || PaymentType == null || DeliveryOrCollection == null || CustomerName == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("thing/update id=" + ReferenceNo);
+            System.out.println("OrderController/update id=" + ReferenceNo);
 
             PreparedStatement ps = Main.db.prepareStatement("UPDATE Orders SET DateOrder = ?, OrderPrice = ?, PaymentType = ?, PaymentSuccessful = ?, DeliveryOrCollection = ?, CustomerName = ? WHERE ReferenceNo = ?");
             ps.setString(1, DateOrder);
@@ -90,6 +91,7 @@ public class OrderController {
             ps.setString(4, PaymentType);
             ps.setString(5, DeliveryOrCollection);
             ps.setString(6, CustomerName);
+            ps.setInt(7, ReferenceNo);
             ps.execute();
             return "{\"status\": \"OK\"}";
 

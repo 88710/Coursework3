@@ -20,14 +20,14 @@ public class DeliveryController {
     @Path("new")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public static String insertDelivery(@FormDataParam("ReferenceNo") Integer ReferenceNo, @FormDataParam("HouseNumber") Integer HouseNumber, @FormDataParam("StreetName") String StreetName, @FormDataParam("Town") String Town, @FormDataParam("Postcode") String Postcode) {
+    public static String insertDelivery(@FormDataParam("CustomerId") Integer CustomerID, @FormDataParam("HouseNumber") Integer HouseNumber, @FormDataParam("StreetName") String StreetName, @FormDataParam("Town") String Town, @FormDataParam("Postcode") String Postcode) {
         try {
-            if (ReferenceNo == null || HouseNumber == null || StreetName == null || Town == null || Postcode == null) {
+            if (CustomerID == null || HouseNumber == null || StreetName == null || Town == null || Postcode == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("thing/new ReferenceNo=" + ReferenceNo);
-            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Delivery(ReferenceNO, HouseNumber, StreetName, Town, Postcode) Values (?,?,?,?,?)");
-            ps.setInt(1, ReferenceNo);
+            System.out.println("DeliveryController/new ReferenceNo=" + CustomerID);
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Delivery(CustomerID, HouseNumber, StreetName, Town, Postcode) Values (?,?,?,?,?)");
+            ps.setInt(1, CustomerID);
             ps.setInt(2, HouseNumber);
             ps.setString(3, StreetName);
             ps.setString(4, Town);
@@ -44,15 +44,16 @@ public class DeliveryController {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public static String listDelivery(int RefNo) {
+    public static String listDelivery(int CustomerID) {
         System.out.println("Delivery/list");
         JSONArray list = new JSONArray();
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT ReferenceNo, HouseNumber, StreetName, Town, Postcode, FROM Delivery WHERE ReferenceNo = RefNo ");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT CustomerID, HouseNumber, StreetName, Town, Postcode, FROM Delivery WHERE CustomerID = ? ");
+            ps.setInt(1,CustomerID);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
                 JSONObject item = new JSONObject();
-                item.put("ReferenceNo",results.getInt(1));
+                item.put("CustomerID",results.getInt(1));
                 item.put("HouseNumber",results.getInt(2));
                 item.put("StreetName",results.getString(3));
                 item.put("Town",results.getString(4));

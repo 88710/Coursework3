@@ -26,7 +26,7 @@ public class Main {
 
         }
     }
-//test
+
     private static void closeDatabase() {
         try {
             db.close();
@@ -35,23 +35,23 @@ public class Main {
             System.out.println("Database disconnection error: " + exception.getMessage());
         }
     }
-//test
+
     public static void main(String[] args) {
         openDatabase("CourseworkDatabase.db");
 
-        try {
-   Controllers.PizzaController.insertPizza(3,"Plain", true, false, false);
+  /*      try {
+   Controllers.DeliveryController.insertDelivery(5,13, "Short Street", "London", "GU140XU");
 } catch(Exception exception) {
    System.out.println("Database insert error: " + exception.getMessage());
 }
-System.out.println("Insertion successful" + Controllers.PizzaController.listPizza(3));
-
+System.out.println("Insertion successful" + Controllers.DeliveryController.listDelivery(5));
+*/
 /*try {
-   Controllers.OrderController.insertOrder(000001,"23/10/2019", 12.99, true, "cash","Collection", "John");
+   Controllers.OrderController.insertOrder(8,"23/10/2019", 12.99, true, "cash","Collection", "John");
 } catch(Exception exception) {
    System.out.println("Database insert error: " + exception.getMessage());
 }
-System.out.println("Insertion successful" + Controllers.OrderController.listOrder(000001));*/
+System.out.println("Insertion successful" + Controllers.OrderController.listOrder(8));*/
 
 /*try {
    Controllers.OrderController.insertOrder(000002,"13/09/2019", 15.99, true, "cash","Collection", "Steve");
@@ -76,20 +76,20 @@ openDatabase("CourseworkDatabase.db");*/
    System.out.println("Database list error: " + exception.getMessage());
 }
 System.out.println("Insertion successful" + Controllers.PizzaController.listPizza("Tropical"));*/
-
-/*try {
-   Controllers.OrderController.updateOrder(000001, "12/09/2019", 12.50, true, "Delivery", "cash", "Sarah");
+/*
+try {
+   Controllers.PizzaController.updatePizza(1, "Meaty", false, false, false);
 } catch(Exception exception) {
    System.out.println("Database list error: " + exception.getMessage());
 }
-System.out.println("Insertion successful" + Controllers.OrderController.listOrder(000001));*/
-
-/*try {
-   Controllers.PizzaController.deletePizza("Tropical");
-} catch(Exception exception) {
-   System.out.println("Database list error: " + exception.getMessage());
-}
+System.out.println("Insertion successful" + Controllers.PizzaController.listPizza(1));
 */
+try {
+   Controllers.OrderController.deleteOrder(2);
+} catch(Exception exception) {
+   System.out.println("Database list error: " + exception.getMessage());
+}
+
 
         closeDatabase();
         openDatabase("CourseworkDatabase.db");
