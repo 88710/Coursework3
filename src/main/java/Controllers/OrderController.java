@@ -24,7 +24,7 @@ public class OrderController {
             if (ReferenceNo == null || DateOrder == null || PaymentType == null || DeliveryOrCollection == null || CustomerName == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("thing/new ReferenceNo=" + ReferenceNo);
+            System.out.println("insert/new ReferenceNo=" + ReferenceNo);
             PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Orders(ReferenceNO, DateOrder, OrderPrice, PaymentSuccessful, PaymentType, DeliveryOrCollection, CustomerName) Values (?,?,?,?,?,?,?)");
             ps.setInt(1, ReferenceNo);
             ps.setString(2, DateOrder);
@@ -33,7 +33,7 @@ public class OrderController {
             ps.setString(5, PaymentType);
             ps.setString(6, DeliveryOrCollection);
             ps.setString(7, CustomerName);
-
+            System.out.println("Insertion successful");
             ps.executeUpdate();//test
             return "{\"status\": \"OK\"}";
 

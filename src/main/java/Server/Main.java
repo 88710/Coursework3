@@ -20,6 +20,7 @@ public class Main {
             config.enforceForeignKeys(true);
             db = DriverManager.getConnection("jdbc:sqlite:resources/" + dbFile, config.toProperties());
             System.out.println("Database connection successfully established.");
+            System.out.println("Database successfully opened");
 
         } catch (Exception exception) {
             System.out.println("Database connection error:" + exception.getMessage());
@@ -40,19 +41,19 @@ public class Main {
         openDatabase("CourseworkDatabase.db");
 
   /*      try {
-   Controllers.DeliveryController.insertDelivery(5,13, "Short Street", "London", "GU140XU");
+   Controllers.DeliveryController.insertDelivery(8,13, "Short Street", "London", "GU140XU");
 } catch(Exception exception) {
    System.out.println("Database insert error: " + exception.getMessage());
 }
-System.out.println("Insertion successful" + Controllers.DeliveryController.listDelivery(5));
+System.out.println("Insertion successful" + Controllers.DeliveryController.listDelivery(8));
 */
 /*try {
-   Controllers.OrderController.insertOrder(8,"23/10/2019", 12.99, true, "cash","Collection", "John");
+   Controllers.OrderController.insertOrder(10,"23/10/2019", 12.99, true, "cash","Collection", "John");
 } catch(Exception exception) {
    System.out.println("Database insert error: " + exception.getMessage());
 }
-System.out.println("Insertion successful" + Controllers.OrderController.listOrder(8));*/
-
+System.out.println("Insertion successful" + Controllers.OrderController.listOrder(10));
+*/
 /*try {
    Controllers.OrderController.insertOrder(000002,"13/09/2019", 15.99, true, "cash","Collection", "Steve");
 } catch(Exception exception) {
@@ -60,15 +61,14 @@ System.out.println("Insertion successful" + Controllers.OrderController.listOrde
 }
 System.out.println("Insertion successful" + Controllers.OrderController.listOrder(000002));*/
 
-/*try {
+try {
    Controllers.PizzaController.listPizza("Tropical");
 } catch(Exception exception) {
    System.out.println("Database list error: " + exception.getMessage());
 }
 System.out.println("Insertion successful" + Controllers.PizzaController.listPizza("Tropical"));
 
-closeDatabase();
-openDatabase("CourseworkDatabase.db");*/
+
 
 /*try {
    Controllers.PizzaController.listPizza("Tropical");
@@ -92,9 +92,9 @@ System.out.println("Insertion successful" + Controllers.PizzaController.listPizz
 
 
         closeDatabase();
-        openDatabase("CourseworkDatabase.db");
+        /*openDatabase("CourseworkDatabase.db");
 
-       /* ResourceConfig config = new ResourceConfig();
+        ResourceConfig config = new ResourceConfig();
         config.packages("Controllers");
         config.register(MultiPartFeature.class);
         ServletHolder servlet = new ServletHolder(new ServletContainer(config));
