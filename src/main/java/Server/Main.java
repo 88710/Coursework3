@@ -38,7 +38,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        openDatabase("CourseworkDatabase.db");
+
 
   /*      try {
    Controllers.DeliveryController.insertDelivery(8,13, "Short Street", "London", "GU140XU");
@@ -54,20 +54,21 @@ System.out.println("Insertion successful" + Controllers.DeliveryController.listD
 }
 System.out.println("Insertion successful" + Controllers.OrderController.listOrder(10));
 */
-/*try {
-   Controllers.OrderController.insertOrder(000002,"13/09/2019", 15.99, true, "cash","Collection", "Steve");
+/*
+try {
+   Controllers.OrderController.insertOrder(13,"13/09/2019", 15.99, true, "cash","Collection", "Steve");
 } catch(Exception exception) {
    System.out.println("Database insert error: " + exception.getMessage());
 }
-System.out.println("Insertion successful" + Controllers.OrderController.listOrder(000002));*/
+System.out.println("Insertion successful" + Controllers.OrderController.listOrder(13));*/
 
-try {
+/* {
    Controllers.PizzaController.listPizza("Tropical");
 } catch(Exception exception) {
    System.out.println("Database list error: " + exception.getMessage());
 }
 System.out.println("Insertion successful" + Controllers.PizzaController.listPizza("Tropical"));
-
+*/
 
 
 /*try {
@@ -82,17 +83,19 @@ try {
 } catch(Exception exception) {
    System.out.println("Database list error: " + exception.getMessage());
 }
-System.out.println("Insertion successful" + Controllers.PizzaController.listPizza(1));
+System.out.println("Update successful" + Controllers.PizzaController.listPizza(1));
 */
-/*try {
+/*
+try {
    Controllers.OrderController.deleteOrder(2);
+    System.out.println("Delete successful");
 } catch(Exception exception) {
    System.out.println("Database list error: " + exception.getMessage());
 }*/
 
 
-        closeDatabase();
-        /*openDatabase("CourseworkDatabase.db");
+        //closeDatabase();
+        openDatabase("CourseworkDatabase.db");
 
         ResourceConfig config = new ResourceConfig();
         config.packages("Controllers");
@@ -109,7 +112,7 @@ System.out.println("Insertion successful" + Controllers.PizzaController.listPizz
             server.join();
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
 
 
     }

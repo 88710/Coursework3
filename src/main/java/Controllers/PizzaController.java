@@ -5,15 +5,12 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+    @Path("Pizzas/")
     public class PizzaController {
         @POST
         @Path("new")
@@ -42,12 +39,13 @@ import java.sql.ResultSet;
         }
 
         @GET
-        @Path("list")
+        @Path("list/{PizzaId}")
         @Produces(MediaType.APPLICATION_JSON)
-        public static String listPizza(Integer PizzaId) {
+        public static String listPizza(@PathParam("PizzaId") Integer PizzaId) {
             System.out.println("Pizzas/list");
             JSONArray list = new JSONArray();
             try {
+                System.out.println("Pizzas/list");
                 PreparedStatement ps = Main.db.prepareStatement("SELECT PizzaId, PizzaName, Vegetarian, Vegan, GlutenFree FROM Pizzas WHERE PizzaId = ? ");
                 ps.setInt(1,PizzaId);
                 ResultSet results = ps.executeQuery();
