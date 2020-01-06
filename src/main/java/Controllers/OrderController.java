@@ -5,11 +5,7 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,10 +40,13 @@ public class OrderController {
 
     }
 
+    /*$ curl -s localhost:8081/orders/list/1
+[{"OrderPrice":12.5,"DeliveryOrCollection":"Delivery","PaymentType":"1","DateOrder":"12\/09\/2019","CustomerName":"Sarah","PaymentSuccessful":false,"ReferenceNo":1}]
+*/
     @GET
-    @Path("list")
+    @Path("list/{ReferenceNo}")
     @Produces(MediaType.APPLICATION_JSON)
-    public static String listOrder(int ReferenceNo) {
+    public static String listOrder(@PathParam("ReferenceNo") Integer ReferenceNo) {
         System.out.println("Orders/list");
         JSONArray list = new JSONArray();
         try {
