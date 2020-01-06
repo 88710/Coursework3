@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
+@Path("delivery/")
 public class DeliveryController {
     @POST
     @Path("new")

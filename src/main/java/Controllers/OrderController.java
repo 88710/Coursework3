@@ -13,7 +13,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+@Path("orders/")
 public class OrderController {
     @POST
     @Path("new")
