@@ -44,7 +44,7 @@ public class DeliveryController {
         System.out.println("Delivery/list");
         JSONArray list = new JSONArray();
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT CustomerID, HouseNumber, StreetName, Town, Postcode, FROM Delivery WHERE CustomerID = ? ");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT CustomerID, HouseNumber, StreetName, Town, Postcode FROM Delivery WHERE CustomerID = ? ");
             ps.setInt(1,CustomerID);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
