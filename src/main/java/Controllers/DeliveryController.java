@@ -16,13 +16,18 @@ public class DeliveryController {
     @Path("new")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public static String insertDelivery(@FormDataParam("CustomerId") Integer CustomerID, @FormDataParam("HouseNumber") Integer HouseNumber, @FormDataParam("StreetName") String StreetName, @FormDataParam("Town") String Town, @FormDataParam("Postcode") String Postcode) {
+    public static String insertDelivery(@FormDataParam("CustomerId") Integer CustomerID,
+                                        @FormDataParam("HouseNumber") Integer HouseNumber,
+                                        @FormDataParam("StreetName") String StreetName,
+                                        @FormDataParam("Town") String Town,
+                                        @FormDataParam("Postcode") String Postcode) {
         try {
             if (CustomerID == null || HouseNumber == null || StreetName == null || Town == null || Postcode == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("DeliveryController/new ReferenceNo=" + CustomerID);
-            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Delivery(CustomerID, HouseNumber, StreetName, Town, Postcode) Values (?,?,?,?,?)");
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Delivery" +
+                    "(CustomerID, HouseNumber, StreetName, Town, Postcode) Values (?,?,?,?,?)");
             ps.setInt(1, CustomerID);
             ps.setInt(2, HouseNumber);
             ps.setString(3, StreetName);
@@ -44,7 +49,9 @@ public class DeliveryController {
         System.out.println("Delivery/list");
         JSONArray list = new JSONArray();
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT CustomerID, HouseNumber, StreetName, Town, Postcode FROM Delivery WHERE CustomerID = ? ");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT " +
+                    "CustomerID, HouseNumber, StreetName, Town, Postcode " +
+                    "FROM Delivery WHERE CustomerID = ? ");
             ps.setInt(1,CustomerID);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -66,15 +73,21 @@ public class DeliveryController {
     @Path("update")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public static String updateDelivery(@FormDataParam("ReferenceNo") Integer ReferenceNo, @FormDataParam("HouseNumber") Integer HouseNumber, @FormDataParam("StreetName") String StreetName, @FormDataParam("Town") String Town, @FormDataParam("Postcode") String Postcode) {
+    public static String updateDelivery(@FormDataParam("CustomerID") Integer CustomerID,
+                                        @FormDataParam("HouseNumber") Integer HouseNumber,
+                                        @FormDataParam("StreetName") String StreetName,
+                                        @FormDataParam("Town") String Town,
+                                        @FormDataParam("Postcode") String Postcode) {
         try {
-            if (ReferenceNo == null || HouseNumber == null || StreetName == null || Town == null || Postcode == null) {
+            if (CustomerID == null || HouseNumber == null || StreetName == null || Town == null || Postcode == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("thing/update id=" + ReferenceNo);
+            System.out.println("delivery/update id=" + CustomerID);
 
-            PreparedStatement ps = Main.db.prepareStatement("UPDATE Delivery SET HouseNumber = ?, StreetName = ?, Town = ?, Postcode = ? WHERE ReferenceNo = ?");
-            ps.setInt(1, ReferenceNo);
+            PreparedStatement ps = Main.db.prepareStatement("UPDATE Delivery SET " +
+                    "HouseNumber = ?, StreetName = ?, Town = ?, Postcode = ? " +
+                    "WHERE CustomerID = ?");
+            ps.setInt(1, CustomerID);
             ps.setInt(2, HouseNumber);
             ps.setString(3, StreetName);
             ps.setString(4, Town);
@@ -91,17 +104,17 @@ public class DeliveryController {
     @Path("delete")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public static String deleteDelivery(@FormDataParam("ReferenceNo") Integer ReferenceNo) {
+    public static String deleteDelivery(@FormDataParam("CustomerID") Integer CustomerID) {
 
         try {
-            if (ReferenceNo == null) {
+            if (CustomerID == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("thing/delete id=" + ReferenceNo);
+            System.out.println("thing/delete id=" + CustomerID);
 
-            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Delivery WHERE Referenceno = ?");
+            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Delivery WHERE CustomerID = ?");
 
-            ps.setInt(1, ReferenceNo);
+            ps.setInt(1, CustomerID);
 
             ps.execute();
 

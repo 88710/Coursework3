@@ -11,17 +11,27 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 @Path("orders/")
 public class OrderController {
+
+
     @POST
     @Path("new")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public static String insertOrder(@FormDataParam("ReferenceNo") Integer ReferenceNo, @FormDataParam("DateOrder") String DateOrder, @FormDataParam("OrderPrice") double OrderPrice, @FormDataParam("PaymentSuccessful") boolean PaymentSuccessful, @FormDataParam("PaymentType") String PaymentType, @FormDataParam("DeliveryOrCollection") String DeliveryOrCollection, @FormDataParam("CustomerName") String CustomerName) {
+    public static String insertOrder(@FormDataParam("ReferenceNo") Integer ReferenceNo,
+                                     @FormDataParam("DateOrder") String DateOrder,
+                                     @FormDataParam("OrderPrice") double OrderPrice,
+                                     @FormDataParam("PaymentSuccessful") boolean PaymentSuccessful,
+                                     @FormDataParam("PaymentType") String PaymentType,
+                                     @FormDataParam("DeliveryOrCollection") String DeliveryOrCollection,
+                                     @FormDataParam("CustomerName") String CustomerName) {
         try {
             if (ReferenceNo == null || DateOrder == null || PaymentType == null || DeliveryOrCollection == null || CustomerName == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("insert/new ReferenceNo=" + ReferenceNo);
-            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Orders(ReferenceNO, DateOrder, OrderPrice, PaymentSuccessful, PaymentType, DeliveryOrCollection, CustomerName) Values (?,?,?,?,?,?,?)");
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Orders" +
+                    "(ReferenceNO, DateOrder, OrderPrice, PaymentSuccessful, PaymentType, DeliveryOrCollection, CustomerName)" +
+                    " Values (?,?,?,?,?,?,?)");
             ps.setInt(1, ReferenceNo);
             ps.setString(2, DateOrder);
             ps.setDouble(3, OrderPrice);
@@ -40,9 +50,7 @@ public class OrderController {
 
     }
 
-    /*$ curl -s localhost:8081/orders/list/1
-[{"OrderPrice":12.5,"DeliveryOrCollection":"Delivery","PaymentType":"1","DateOrder":"12\/09\/2019","CustomerName":"Sarah","PaymentSuccessful":false,"ReferenceNo":1}]
-*/
+
     @GET
     @Path("list/{ReferenceNo}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -50,7 +58,9 @@ public class OrderController {
         System.out.println("Orders/list");
         JSONArray list = new JSONArray();
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT ReferenceNo, Dateorder, OrderPrice, PaymentSuccessful, PaymentType, DeliveryOrCollection,CustomerName  FROM Orders WHERE ReferenceNo = ? ");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT " +
+                    "ReferenceNo, Dateorder, OrderPrice, PaymentSuccessful, PaymentType, DeliveryOrCollection,CustomerName  " +
+                    "FROM Orders WHERE ReferenceNo = ? ");
             ps.setInt(1,ReferenceNo);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -76,14 +86,22 @@ public class OrderController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public static String updateOrder(
-            @FormDataParam("ReferenceNo") Integer ReferenceNo, @FormDataParam("DateOrder") String DateOrder, @FormDataParam("OrderPrice") Double OrderPrice, @FormDataParam("PaymentSuccessful") Boolean PaymentSuccessful, @FormDataParam("DeliveryOrCollection") String DeliveryOrCollection, @FormDataParam("PaymentType") String PaymentType, @FormDataParam("CustomerName") String CustomerName) {
+            @FormDataParam("ReferenceNo") Integer ReferenceNo,
+            @FormDataParam("DateOrder") String DateOrder,
+            @FormDataParam("OrderPrice") Double OrderPrice,
+            @FormDataParam("PaymentSuccessful") Boolean PaymentSuccessful,
+            @FormDataParam("DeliveryOrCollection") String DeliveryOrCollection,
+            @FormDataParam("PaymentType") String PaymentType,
+            @FormDataParam("CustomerName") String CustomerName) {
         try {
             if (ReferenceNo == null || DateOrder == null || PaymentType == null || DeliveryOrCollection == null || CustomerName == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("OrderController/update id=" + ReferenceNo);
 
-            PreparedStatement ps = Main.db.prepareStatement("UPDATE Orders SET DateOrder = ?, OrderPrice = ?, PaymentType = ?, PaymentSuccessful = ?, DeliveryOrCollection = ?, CustomerName = ? WHERE ReferenceNo = ?");
+            PreparedStatement ps = Main.db.prepareStatement("UPDATE Orders SET " +
+                    "DateOrder = ?, OrderPrice = ?, PaymentType = ?, PaymentSuccessful = ?, DeliveryOrCollection = ?, CustomerName = ? " +
+                    "WHERE ReferenceNo = ?");
             ps.setString(1, DateOrder);
             ps.setDouble(2, OrderPrice);
             ps.setBoolean(3, PaymentSuccessful);

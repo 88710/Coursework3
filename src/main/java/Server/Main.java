@@ -38,63 +38,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        //Methods go here!!
 
-
-  /*      try {
-   Controllers.DeliveryController.insertDelivery(8,13, "Short Street", "London", "GU140XU");
-} catch(Exception exception) {
-   System.out.println("Database insert error: " + exception.getMessage());
-}
-System.out.println("Insertion successful" + Controllers.DeliveryController.listDelivery(8));
-*/
-/*try {
-   Controllers.OrderController.insertOrder(10,"23/10/2019", 12.99, true, "cash","Collection", "John");
-} catch(Exception exception) {
-   System.out.println("Database insert error: " + exception.getMessage());
-}
-System.out.println("Insertion successful" + Controllers.OrderController.listOrder(10));
-*/
-/*
-try {
-   Controllers.OrderController.insertOrder(13,"13/09/2019", 15.99, true, "cash","Collection", "Steve");
-} catch(Exception exception) {
-   System.out.println("Database insert error: " + exception.getMessage());
-}
-System.out.println("Insertion successful" + Controllers.OrderController.listOrder(13));*/
-
-/* {
-   Controllers.PizzaController.listPizza("Tropical");
-} catch(Exception exception) {
-   System.out.println("Database list error: " + exception.getMessage());
-}
-System.out.println("Insertion successful" + Controllers.PizzaController.listPizza("Tropical"));
-*/
-
-
-/*try {
-   Controllers.PizzaController.listPizza("Tropical");
-} catch(Exception exception) {
-   System.out.println("Database list error: " + exception.getMessage());
-}
-System.out.println("Insertion successful" + Controllers.PizzaController.listPizza("Tropical"));*/
-/*
-try {
-   Controllers.PizzaController.updatePizza(1, "Meaty", false, false, false);
-} catch(Exception exception) {
-   System.out.println("Database list error: " + exception.getMessage());
-}
-System.out.println("Update successful" + Controllers.PizzaController.listPizza(1));
-*/
-/*
-try {
-   Controllers.OrderController.deleteOrder(2);
-    System.out.println("Delete successful");
-} catch(Exception exception) {
-   System.out.println("Database list error: " + exception.getMessage());
-}*/
-
-
-        //closeDatabase();
         openDatabase("CourseworkDatabase.db");
 
         ResourceConfig config = new ResourceConfig();

@@ -16,13 +16,19 @@ import java.sql.ResultSet;
         @Path("new")
         @Consumes(MediaType.MULTIPART_FORM_DATA)
         @Produces(MediaType.APPLICATION_JSON)
-        public static String insertPizza(@FormDataParam("PizzaId") Integer PizzaId, @FormDataParam("PizzaName") String PizzaName, @FormDataParam("Vegetarian") Boolean Vegetarian, @FormDataParam("Vegan") Boolean Vegan, @FormDataParam("GlutenFree") Boolean GlutenFree) {
+        public static String insertPizza(@FormDataParam("PizzaId") Integer PizzaId,
+                                         @FormDataParam("PizzaName") String PizzaName,
+                                         @FormDataParam("Vegetarian") Boolean Vegetarian,
+                                         @FormDataParam("Vegan") Boolean Vegan,
+                                         @FormDataParam("GlutenFree") Boolean GlutenFree) {
             try {
                 if (PizzaId == null || PizzaName == null || Vegetarian == null || Vegan == null || GlutenFree == null) {
                     throw new Exception("One or more form data parameters are missing in the HTTP request.");
                 }
                 System.out.println("thing/new PizzaId=" + PizzaId);
-                PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Pizzas(PizzaId, PizzaName, Vegetarian, Vegan, GlutenFree) Values (?,?,?,?,?)");
+                PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Pizzas" +
+                        "(PizzaId, PizzaName, Vegetarian, Vegan, GlutenFree) " +
+                        "Values (?,?,?,?,?)");
                 ps.setInt(1, PizzaId);
                 ps.setBoolean(2, Vegetarian);
                 ps.setBoolean(3, Vegan);
@@ -46,7 +52,8 @@ import java.sql.ResultSet;
             JSONArray list = new JSONArray();
             try {
                 System.out.println("Pizzas/list");
-                PreparedStatement ps = Main.db.prepareStatement("SELECT PizzaId, PizzaName, Vegetarian, Vegan, GlutenFree FROM Pizzas WHERE PizzaId = ? ");
+                PreparedStatement ps = Main.db.prepareStatement("SELECT PizzaId, PizzaName, Vegetarian, Vegan, GlutenFree " +
+                        "FROM Pizzas WHERE PizzaId = ? ");
                 ps.setInt(1,PizzaId);
                 ResultSet results = ps.executeQuery();
                 while (results.next()) {
@@ -69,14 +76,19 @@ import java.sql.ResultSet;
         @Path("update")
         @Consumes(MediaType.MULTIPART_FORM_DATA)
         @Produces(MediaType.APPLICATION_JSON)
-        public static String updatePizza(@FormDataParam("PizzaId") Integer PizzaId, @FormDataParam("PizzaName") String PizzaName, @FormDataParam("Vegetarian") Boolean Vegetarian, @FormDataParam("Vegan") Boolean Vegan, @FormDataParam("GlutenFree") Boolean GlutenFree) {
+        public static String updatePizza(@FormDataParam("PizzaId") Integer PizzaId,
+                                         @FormDataParam("PizzaName") String PizzaName,
+                                         @FormDataParam("Vegetarian") Boolean Vegetarian,
+                                         @FormDataParam("Vegan") Boolean Vegan,
+                                         @FormDataParam("GlutenFree") Boolean GlutenFree) {
             try {
                 if (PizzaId == null || PizzaName == null || Vegetarian == null || Vegan == null || GlutenFree == null ) {
                     throw new Exception("One or more form data parameters are missing in the HTTP request.");
                 }
                 System.out.println("thing/update id=" + PizzaId);
 
-                PreparedStatement ps = Main.db.prepareStatement("UPDATE Pizzas SET  Vegetarian= ?, Vegan = ?, GlutenFree = ? WHERE PizzaId = ?");
+                PreparedStatement ps = Main.db.prepareStatement("UPDATE Pizzas SET  " +
+                        "Vegetarian= ?, Vegan = ?, GlutenFree = ? WHERE PizzaId = ?");
                 ps.setInt(1, PizzaId);
                 ps.setString(1, PizzaName);
                 ps.setBoolean(2, Vegetarian);
