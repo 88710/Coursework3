@@ -10,8 +10,23 @@ h1 {
 
 #content {
     background-color: white;
-    width: 1000px;
+    width: 80%;
     margin: 0 auto;
-    min-height: 600px;
+    height: 1580px;
     padding: 32px;
+}
+.button{
+    display:inline-block;
+    background:none;
+    width: 50px;
+    height: 20px;
+}
+div {
+    width:80vw;
+    height:80vh;
+}
+img {
+    width:80%;
+    height:auto;
+    max-height:100%;
 }
