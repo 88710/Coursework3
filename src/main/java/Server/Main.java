@@ -1,3 +1,5 @@
+// http://localhost:8081/client/index.html to open index website
+// http://localhost:8081/client/checkout.html to open checkout website
 package Server;
 
 import org.eclipse.jetty.server.Server;
@@ -28,7 +30,7 @@ public class Main {
         }
     }
 
-    private static void closeDatabase() {
+    private static void closeDatabase(){
         try {
             db.close();
             System.out.println("Disconnected from database.");
