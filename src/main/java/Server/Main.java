@@ -1,5 +1,4 @@
 // http://localhost:8081/client/index.html to open index website
-// http://localhost:8081/client/checkout.html to open checkout website
 package Server;
 
 import org.eclipse.jetty.server.Server;
