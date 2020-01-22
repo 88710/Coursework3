@@ -10,6 +10,7 @@ function pageLoadCheckout() {
         + '<img src="/client/img/Hawkeye.PNG"  alt="Logo"/>'
         + '<div style="text-align:left;">'
         + '<h2>My Basket:</h2>'
+        + '<h3>console.log(shoppingBasket)</h3>'
 
 
         + '<h4>Enter Voucher Below</h4>'
