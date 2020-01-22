@@ -237,7 +237,7 @@ function editPizza(event,PizzaId,PizzaName,Vegetarian,Vegan,GlutenFree) {
         document.getElementById("editDiv").style.display = 'block';
 
     } else {
-        fetch('/pizza/get/' + id, {method: 'get'}
+        fetch('/pizzas/get/' + id, {method: 'get'}
         ).then(response => response.json()
         ).then(fruit => {
 
@@ -260,3 +260,84 @@ function editPizza(event,PizzaId,PizzaName,Vegetarian,Vegan,GlutenFree) {
         });
     }
 }
+function saveEditPizza(event){
+
+    event.preventDefault();
+
+    if (document.getElementById("PizzaName").value.trim() === '') {
+        alert("Please provide a pizza name.");
+        return;
+    }
+
+    if (document.getElementById("Vegetarian").value.trim() === '') {
+        alert("Is this pizza vegetarian?.");
+        return;
+    }
+
+    if (document.getElementById("Vegan").value.trim() === '') {
+        alert("Is this pizza Vegan?.");
+        return;
+    }
+    if (document.getElementById("GlutenFree").value.trim() === '') {
+        alert("Is this pizza GlutenFree?.");
+        return;
+    }
+    const id = document.getElementById("PizzaId").value;
+    const form = document.getElementById("fruitForm");
+    const formData = new FormData(form);
+
+    let apiPath = '';
+    if (id === '') {
+        apiPath = '/pizzas/new';
+    } else {
+        apiPath = '/pizzas/update';
+    }
+
+    fetch(apiPath, {method: 'post', body: formData}
+    ).then(response => response.json()
+    ).then(responseData => {
+
+        if (responseData.hasOwnProperty('error')) {
+            alert(responseData.error);
+        } else {
+            document.getElementById("listDiv").style.display = 'block';
+            document.getElementById("editDiv").style.display = 'none';
+            pageLoadAdmin();
+        }
+    });
+}
+function cancelEditPizza(event) {
+
+    event.preventDefault();
+
+    document.getElementById("listDiv").style.display = 'block';
+    document.getElementById("editDiv").style.display = 'none';
+
+}
+function deletePizza(event) {
+
+    const ok = confirm("Are you sure?");
+
+    if (ok === true) {
+
+        let id = event.target.getAttribute("data-id");
+        let formData = new FormData();
+        formData.append("id", id);
+
+        fetch('/pizzas/delete', {method: 'post', body: formData}
+        ).then(response => response.json()
+        ).then(responseData => {
+
+                if (responseData.hasOwnProperty('error')) {
+                    alert(responseData.error);
+                } else {
+                    pageLoadAdmin();
+                }
+            }
+        );
+    }
+}
+
+
+
+
