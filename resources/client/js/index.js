@@ -1,3 +1,4 @@
+
 function pageLoadCheckout() {
 
     let now = new Date();
@@ -10,14 +11,12 @@ function pageLoadCheckout() {
         + '<img src="/client/img/Hawkeye.PNG"  alt="Logo"/>'
         + '<div style="text-align:left;">'
         + '<h2>My Basket:</h2>'
-        + '<h3>console.log(shoppingBasket)</h3>'
-
-
-        + '<h4>Enter Voucher Below</h4>'
+        + '<h5>Basket Empty</h5>'
+        + '<h3>Enter Voucher Below</h3>'
         + '<form>'
         + '<input type="text" name="Voucher">'
         + '</form>'
-        + '<button onclick= //javascriptforvoucher>Apply</button>'
+        + '<button onclick=alert("VoucherApplied");>Apply</button>'
         + '<div style="text-align:center;">'
         + '<button onclick="window.location.href = \'http://localhost:8081/client/delivery.html\';">Proceed To Checkout</button>'
         + '<div style="font-style: italic;" style="text-align:right;">'
@@ -28,10 +27,11 @@ function pageLoadCheckout() {
 }
 
 function pageLoadIndex() {
-
+    let shoppingBasket=0;
     let now = new Date();
 
     let myHTML = '<div style="text-align:Left;">'
+        + 'let shoppingBasket=0;'
         + '<button onclick="window.location.href = \'http://localhost:8081/client/index.html\';">Home</button>'
         + '<button onclick="window.location.href = \'http://localhost:8081/client/checkout.html\';">Basket</button>'
         + '<button onclick="window.location.href = \'http://localhost:8081/client/AdminLogin.html\';">Admin</button>'
@@ -41,13 +41,13 @@ function pageLoadIndex() {
         + '<h2 style="text-align:right;">Small Medium Large</h2>'
         + '<div style="text-align:Left;">'
         + '<h2>Margerhita</h2>'
-        + '<button>Small</button>'
+        + '<button onclick=alert("Added to Basket");>Small</button>'
         + '<button>Medium</button>'
         + '<button>Large</button>'
         + '<h2 style="text-align:right;">8.99 10.99 13.99</h2>'
         + '<div style="text-align:Left;">'
         + '<h2>Pepperoni</h2>'
-        + '<button>Small</button>'
+        + '<button onclick=shoppingBasket.push("Small Margerita");>Small</button>'
         + '<button>Medium</button>'
         + '<button>Large</button>'
         + '<h2 style="text-align:right;">9.99 12.99 15.99</h2>'
@@ -108,6 +108,7 @@ function pageLoadPayment() {
         + '<input type="text" name="CCV">'
         + '</form>'
         + '<div style="text-align:center;">'
+        + '<button onclick=alert("InvalidExpiryDate");>Make Payment</button>'
         + '<button onclick="window.location.href = \'http://localhost:8081/client/success.html\';">Make Payment</button>'
         + '<div style="font-style: italic;">'
         + 'Generated at ' + now.toLocaleTimeString()
@@ -150,6 +151,7 @@ function pageLoadDelivery() {
         + '</form>'
 
         + '<div style="text-align:center;">'
+        + '<button onclick=alert("InvalidExpiryDate");>Proceed To Payment</button>'
         + '<button onclick="window.location.href = \'http://localhost:8081/client/payment.html\';">Proceed To Payment</button>'
 
         + '<div style="font-style: italic;">'
@@ -180,6 +182,27 @@ function pageLoadSuccess() {
     document.getElementById("testDiv").innerHTML = myHTML;
 
 }
+function pageLoadFail() {
+
+    let now = new Date();
+
+    let myHTML = '<div style="text-align:Left;">'
+        + '<button onclick="window.location.href = \'http://localhost:8081/client/index.html\';">Home</button>'
+        + '<button onclick="window.location.href = \'http://localhost:8081/client/checkout.html\';">Basket</button>'
+        + '<button onclick="window.location.href = \'http://localhost:8081/client/AdminLogin.html\';">Admin</button>'
+
+        + '<div style="text-align:center;">'
+        + '<img src="/client/img/Hawkeye.PNG"  alt="Logo"/>'
+        + '<h1>Payment Failed</h1>'
+        + '<h3>Please Try Again</h3>'
+
+        + '<div style="font-style: italic;">'
+        + 'Generated at ' + now.toLocaleTimeString()
+        + '</div>';
+
+    document.getElementById("testDiv").innerHTML = myHTML;
+
+}
 function pageLoadAdmin() {
 
     let now = new Date();
@@ -190,6 +213,22 @@ function pageLoadAdmin() {
         + '<button onclick="window.location.href = \'http://localhost:8081/client/AdminLogin.html\';">Admin</button>'
         + '<div style="text-align:center;">'
         + '<img src="/client/img/Hawkeye.PNG"  alt="Logo"/>'
+        + '<div style="text-align:left;">'
+        + '<h3>Margherita</h3>'
+        + '<button>Edit</button>'
+        + '<br>'
+        + '<h3>Pepperoni</h3>'
+        + '<button>Edit</button>'
+        + '<br>'
+        + '<h3>Meatfeast</h3>'
+        + '<button>Edit</button>'
+        + '<br>'
+        + '<h3>Vegi Passion</h3>'
+        + '<button>Edit</button>'
+        + '<br>'
+        + '<h3>Seafood Supreme</h3>'
+        + '<button>Edit</button>'
+        + '<br>'
         + '<div style="font-style: italic;">'
         + 'Generated at ' + now.toLocaleTimeString()
         + '</div>';
@@ -212,6 +251,36 @@ function pageLoadAdminLogin() {
         + '<input type="text" name="AdminPass">'
         + '</form>'
         + '<button onclick="window.location.href = \'http://localhost:8081/client/Admin.html\';">Login</button>'
+        + '<div style="font-style: italic;">'
+        + 'Generated at ' + now.toLocaleTimeString()
+        + '</div>';
+
+    document.getElementById("testDiv").innerHTML = myHTML;
+
+}
+function pageLoadPizzaEdit() {
+
+    let now = new Date();
+
+    let myHTML = '<div style="text-align:Left;">'
+        + '<button onclick="window.location.href = \'http://localhost:8081/client/index.html\';">Home</button>'
+        + '<button onclick="window.location.href = \'http://localhost:8081/client/checkout.html\';">Basket</button>'
+        + '<button onclick="window.location.href = \'http://localhost:8081/client/AdminLogin.html\';">Admin</button>'
+
+        + '<div style="text-align:center;">'
+        + '<img src="/client/img/Hawkeye.PNG"  alt="Logo"/>'
+        + '<div style="text-align:left;">'
+        + '<h2>Meatfeast</h2>'
+        + '<h4>Cheese: yes</h4>'
+        + '<button>+</button><button>-</button>'
+        + '<h4>Tomato Sauce: yes</h4>'
+        + '<button>+</button><button>-</button>'
+        + '<h4>Pepperoni: yes</h4>'
+        + '<button>+</button><button>-</button>'
+        + '<h4>Ham: yes</h4>'
+        + '<button>+</button><button>-</button>'
+        + '<h4>Sausage: yes</h4>'
+        + '<button>+</button><button>-</button>'
         + '<div style="font-style: italic;">'
         + 'Generated at ' + now.toLocaleTimeString()
         + '</div>';
